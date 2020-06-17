@@ -3,6 +3,7 @@
 
 #include "../fs/fs.h"
 #include "../fs/fs_api.h"
+#include <string>
 
 #if defined (__cplusplus)
 extern "C" {
@@ -11,10 +12,15 @@ extern "C" {
 void phex(unsigned char *buf, int size);
 void pentry(entry_t *entry);
 
-void pinfo(fs_info_t *info);
-
 #if defined (__cplusplus)
 }
 #endif
+
+class Utils {
+public:
+    static std::string get_path(std::string pwd, std::string p);
+    static void pinfo(fs_info_t *info);
+    static std::string hex(unsigned char *buf, int size);
+};
 
 #endif

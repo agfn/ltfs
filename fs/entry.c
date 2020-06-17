@@ -113,7 +113,7 @@ int entry_rm_next(disk_ptr_t prev, disk_ptr_t next_next)
     entry_t ep;
     dev_read(prev, (void *)&ep, sizeof(ep));
 
-    ep.dir.sub_entry = next_next;
+    ep.next = next_next;
     dev_write(prev, (void *)&ep, sizeof(ep));
     
     return 0;

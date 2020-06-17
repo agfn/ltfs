@@ -106,9 +106,9 @@ int path_remove(struct path_st *self, struct path_st *path)
     int err = -1;
     path_t *p = path_find(self, path);
     disk_ptr_t next = 0;
-    if (p->next) next = p->next->ptr;
+    if (p && p->next) next = p->next->ptr;
 
-    if (p->parent) {
+    if (p && p->parent) {
         if (p->parent->child == p) {
             // direct child
             p->parent->child = p->next;

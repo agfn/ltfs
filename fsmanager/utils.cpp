@@ -1,5 +1,5 @@
 #include "utils.h"
-#include <stdio.h>
+#include <cstdio>
 
 void phex(unsigned char *buf, int size)
 {
@@ -34,7 +34,7 @@ void pentry(entry_t *entry)
     }
 }
 
-void pinfo(fs_info_t *info)
+void Utils::pinfo(fs_info_t *info)
 {
     info->reserve[0] = 0;
     printf("[%c]%s 0x%llx %lld %s\n",
@@ -43,4 +43,31 @@ void pinfo(fs_info_t *info)
         info->entry_ptr,
         info->size,
         info->name);
+}
+
+std::string Utils::get_path(std::string pwd, std::string p)
+{
+    std::string result = "";
+    if (!pwd.length()) pwd = "/";
+
+    if (p[0] == '/') { 
+        result = p;
+    } else {
+        if (pwd.back() != '/') 
+            pwd += '/';
+        result = pwd + p;
+    }
+
+    return result;
+}
+
+std::string Utils::hex(unsigned char *buf, int length)
+{
+    std::string s;
+    char hextable[] = "0123456789ABCDEF";
+    for (int i = 0; i < length; i++) {
+        s += hextable[(buf[i] >> 4) & 0xf];
+        s += hextable[buf[i] & 0xf];
+    }
+    return s;
 }
